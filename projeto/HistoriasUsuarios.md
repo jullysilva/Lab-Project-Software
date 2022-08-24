@@ -16,11 +16,11 @@ Historias de usuário sobre as suas expectativas sobre o sistema de matrículas,
 - Como professor, eu quero acessar a lista de alunos para visualizar os alunos matriculados na disciplina.
 
 >## Aluno
-- Como aluno, eu quero solicitar a matrícula numa disciplina obrigatória para poder cursá-la no semestre.
+- Como aluno, eu quero solicitar a matrícula em disciplinas obrigatória para poder cursá-la no semestre.
 
-- Como aluno, eu quero solicitar a matrícula numa disciplina optativa para poder cursá-la no semestre.
+- Como aluno, eu quero solicitar a matrícula em disciplinas optativa para poder cursá-la no semestre.
 
-- Como aluno, eu quero cancelar a matrícula em disciplina para não ter de cursá-la no semestre.
+- Como aluno, eu quero cancelar a matrícula em disciplinas para não ter de cursá-la no semestre.
 
 - Como aluno, eu quero visualizar a cobrança do semestre para que o pagamento possa ser feito.
 
