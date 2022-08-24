@@ -13,8 +13,6 @@ Historias de usuário sobre as suas expectativas sobre o sistema de matrículas,
 >## Professor
 - Como professor, eu quero acessar a lista de disciplinas para ter acesso aos alunos matriculados em cada disciplina.
 
-- Como professor, eu quero acessar a lista de alunos para visualizar os alunos matriculados na disciplina.
-
 >## Aluno
 - Como aluno, eu quero solicitar a matrícula em disciplinas obrigatória para poder cursá-la no semestre.
 
