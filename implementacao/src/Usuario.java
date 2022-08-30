@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Usuario {
     private Integer id;
     private String nome;
@@ -6,7 +8,11 @@ public class Usuario {
     private String senha;
     private Boolean status;
 
-    public void logar(Usuario usuario) {
+    public boolean logar(ArrayList<Usuario> usuarios) {
+        if (usuarios.stream().anyMatch(u -> u.getEmail() == this.getEmail() && u.getSenha() == this.getSenha())) {
+            return true;
+        }
+        return false;
     }
 
     public Usuario(Integer id, String nome, String cpf, String email, String senha, Boolean status) {
@@ -16,6 +22,14 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.status = status;
+    }
+    public Usuario(){
+        setId(-1);
+        setNome("");
+        setCpf("");
+        setEmail("");
+        setSenha("");
+        setStatus(false);
     }
 
     public Integer getId() {
@@ -64,5 +78,12 @@ public class Usuario {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String ToString() {
+        StringBuilder sr = new StringBuilder();
+        sr.append("\nNome :").append(this.getNome()).append("\nCpf: ").append(this.getCpf()).append("\nEmail: ")
+                .append(this.getEmail());
+        return sr.toString();
     }
 }

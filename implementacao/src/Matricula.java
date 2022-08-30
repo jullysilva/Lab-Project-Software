@@ -1,4 +1,6 @@
-public class Matricula {
+import java.io.Serializable;
+
+public class Matricula implements Serializable  {
 
     private Integer id;
     private Disciplina disciplina;

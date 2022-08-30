@@ -1,24 +1,30 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Disciplina {
 
-    private static final int LIMITE_ALUNOS = 60;
-    private static final int MIN_ALUNOS = 3;
+    static final int LIMITE_ALUNOS = 60;
+    static final int MIN_ALUNOS = 3;
 
     private Integer id;
+    private String nome;
     private Boolean EhOptativa;
     private Boolean EhAtiva;
-    private List<Aluno> alunos;
-    private List<Professor> professores;
-    public List<Aluno> ListarAlunos;
+    private ArrayList<Aluno> alunos;
+    private ArrayList<Professor> professores;
+    private Integer cargaHoraria;
+    private Double valorHoraAula;
 
-    public Disciplina(Integer id, Boolean ehOptativa, Boolean ehAtiva, List<Aluno> alunos, List<Professor> professores, List<Aluno> listarAlunos) {
+    public Disciplina(Integer id, Boolean ehOptativa, Boolean ehAtiva, ArrayList<Aluno> alunos, ArrayList<Professor> professores,
+            Double valorHoraAula, Integer cargaHoraria, String nome) {
         this.id = id;
         EhOptativa = ehOptativa;
         EhAtiva = ehAtiva;
         this.alunos = alunos;
         this.professores = professores;
-        ListarAlunos = listarAlunos;
+        this.cargaHoraria = cargaHoraria;
+        this.valorHoraAula = valorHoraAula;
+        this.nome = nome;
     }
 
     public Integer getId() {
@@ -49,7 +55,7 @@ public class Disciplina {
         return alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
+    public void setAlunos(ArrayList<Aluno> alunos) {
         this.alunos = alunos;
     }
 
@@ -57,15 +63,27 @@ public class Disciplina {
         return professores;
     }
 
-    public void setProfessores(List<Professor> professores) {
+    public void setProfessores(ArrayList<Professor> professores) {
         this.professores = professores;
     }
 
-    public List<Aluno> getListarAlunos() {
-        return ListarAlunos;
+    public Double getValorDisciplina() {
+        return this.valorHoraAula * this.cargaHoraria;
     }
 
-    public void setListarAlunos(List<Aluno> listarAlunos) {
-        ListarAlunos = listarAlunos;
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void ativarDisciplina() {
+        if (alunos.size() >= 3) {
+            setEhAtiva(true);
+        } else {
+            setEhAtiva(false);
+        }
     }
 }

@@ -1,17 +1,20 @@
-import java.util.Map;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Curso {
+public class Curso implements Serializable {
 
   private Integer id;
   private String nome;
   private Integer credito;
-  private Disciplina disciplina;
+  private ArrayList<Disciplina> disciplinas;
 
-  public Curso(Integer id, String nome, Integer credito, Disciplina disciplina) {
+ 
+
+  public Curso(Integer id, String nome, Integer credito, ArrayList<Disciplina> disciplinas) {
     this.id = id;
     this.nome = nome;
     this.credito = credito;
-    this.disciplina = disciplina;
+    this.disciplinas = disciplinas;
   }
 
   public Integer getId() {
@@ -38,11 +41,12 @@ public class Curso {
     this.credito = credito;
   }
 
-  public Disciplina getDisciplina() {
-    return disciplina;
+  public ArrayList<Disciplina> getDisciplina() {
+    return disciplinas;
   }
 
-  public void setDisciplina(Disciplina disciplina) {
-    this.disciplina = disciplina;
+  public void setDisciplina(ArrayList<Disciplina> disciplinas) {
+    this.disciplinas = disciplinas;
   }
+  
 }
