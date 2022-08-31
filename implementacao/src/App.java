@@ -16,6 +16,7 @@ public class App {
 			System.out.print("\n\t 1 - ALUNO \n\t 2 - PROFESSOR \n\t 3 - ADMINISTRADOR \n\t 0 - ABANDONAR SISTEMA");
 			System.out.print("\n\nEscolha: ");
 			TLogin = teclado.nextInt();
+			teclado.nextLine();
 			System.out.print("\n\t Digite o email: ");
 			email = teclado.nextLine();
 			System.out.print("\n\t Digite a senha: ");
@@ -35,9 +36,20 @@ public class App {
 					break;
 				case 3:
 					Administrador adm = loginAdministrador(email, senha);
-					pausa(teclado);
 					System.out.print(
-							"\t 1 - CADASTRO \n\t 2 - EXCLUSÃO \n\t 3 - ADMINISTRADOR \n\t 0 - ABANDONAR SISTEMA");
+							"\t 1 - CADASTRO \n\t 2 - EXCLUSÃO \n\t 3 - ADMINISTRADOR \n\t 0 - ABANDONAR SISTEMA\n3");
+							int opcao = teclado.nextInt();
+							switch(opcao){
+
+								case 1:
+								adm.adicionarUsuario(coletarDados(teclado),teclado);
+							
+								break;
+								case 2:
+								break;
+								case 3: 
+								break; 
+							}
 					break;
 				default:
 					System.out.println("Opção inválida");
@@ -49,30 +61,7 @@ public class App {
 		teclado.close();
 	}
 
-	private static void cadastroMenu(Scanner teclado) {
-		System.out.println("\n\tDigite o tipo de usuario");
-		System.out.println(" \n 1 - ALUNO \n 2 - PROFESSOR \n 3 - ADMINISTRADOR");
-		int tipo = teclado.nextInt();
-		switch (tipo) {
-			case 1:
-				Aluno aluno = new Aluno(coletarDados(teclado));
-				break;
-			case 2:
-				Professor professor = new Professor(coletarDados(teclado));
-				break;
-			case 3:
-				Administrador adm = new Administrador(coletarDados(teclado));
-				System.out.println("Digite o cargo: ");
-				String cargo = teclado.nextLine();
-				adm.setCargo(cargo);
-				System.out.println("Digite o salario: ");
-				Double salario = teclado.nextDouble();
-				teclado.nextLine();
-				adm.setSalario(salario);
-				FileManager.listaAdministradores.add(adm);
-				break;
-		}
-	}
+
 
 	private static Usuario coletarDados(Scanner teclado) {
 		System.out.println("Digite nome: ");

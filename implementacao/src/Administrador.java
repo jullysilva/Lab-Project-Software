@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Administrador extends Usuario implements Serializable {
 
@@ -19,8 +20,43 @@ public class Administrador extends Usuario implements Serializable {
     public void removerDisciplina(Disciplina disciplina) {
 
     }
+    
 
-    public void adicionarUsuario(Usuario usuario) {
+    public void adicionarUsuario(Usuario usuario, Scanner teclado) {
+        System.out.println("\n\tDigite o tipo de usuario");
+		System.out.println(" \n 1 - ALUNO \n 2 - PROFESSOR \n 3 - ADMINISTRADOR");
+		int tipo = teclado.nextInt();
+        teclado.nextLine();
+		switch (tipo) {
+			case 1:
+				Aluno aluno = new Aluno(usuario);
+                System.out.println("Digite a matricula: ");
+				String matricula = teclado.nextLine();
+				aluno.setMatricula(matricula);
+                aluno.setDisciplinasMatriculadas(null);
+				FileManager.listaAlunos.add(aluno);
+				break;
+			case 2:
+				Professor professor = new Professor(usuario);
+                System.out.println("Digite o salario: ");
+				Double salarioprofessor = teclado.nextDouble();
+				professor.setSalario(salarioprofessor);
+                //implementar buscar disciplinas para serem adicionadas
+                professor.setDisciplinas(null);
+				FileManager.listaProfessores.add(professor);
+				break;
+			case 3:
+				Administrador adm = new Administrador(usuario);
+				System.out.println("Digite o cargo: ");
+				String cargo = teclado.nextLine();
+				adm.setCargo(cargo);
+				System.out.println("Digite o salario: ");
+				Double salarioAdm = teclado.nextDouble();
+				teclado.nextLine();
+				adm.setSalario(salarioAdm);
+				FileManager.listaAdministradores.add(adm);
+				break;
+		}
     }
 
     public void removerUsuario() {
@@ -59,5 +95,21 @@ public class Administrador extends Usuario implements Serializable {
     public Double getSalario() {
         return this.salario;
     }
+    private static Usuario coletarDados(Scanner teclado) {
+		System.out.println("Digite nome: ");
+		String nome = teclado.nextLine();
+		teclado.nextLine();
+
+		System.out.print("Digite o cpf: ");
+		String cpf = teclado.nextLine();
+
+		System.out.print("Digite o email: ");
+		String email = teclado.nextLine();
+
+		System.out.print("Digite a senha: ");
+		String senha = teclado.nextLine();
+
+		return new Usuario(1, nome, cpf, email, senha, false);
+	}
 
 }
