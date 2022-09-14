@@ -4,7 +4,7 @@ Historias de usuário sobre as suas expectativas sobre o sistema de aluguel de c
 
 >## Agente
 
-- Como agente, quero analisar os pedidos de um cliente para avaliar a aprovação do aluguel.
+- Como agente, quero analisar os pedidos de um cliente para aferir a aprovação do aluguel.
 
 - Como agente, quero modificar um pedido de alguel para aprovar ou não o pedido de aluguel.
 
