@@ -24,14 +24,6 @@ Historias de usuário sobre as suas expectativas sobre o sistema de aluguel de c
 
 - Como banco, quero gerar um contrato de credito para um pedido de aluguel de carro.
 
->## Sistema
-
-- Como sistema de aluguel, quero cadastrar autmóvel da base de dados.
-
-- Como sistema de aluguel, quero apagar autmóvel da base de dados.
-
-- Como sistema de aluguel, quero buscar autmóvel da base de dados.
-
 >## Usuário
 
 - Como usuário do sistema, eu quero me cadastrar no sistema.
