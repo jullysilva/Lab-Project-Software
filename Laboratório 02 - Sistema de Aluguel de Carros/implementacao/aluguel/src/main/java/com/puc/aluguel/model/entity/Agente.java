@@ -26,7 +26,7 @@ public class Agente {
     private String email;
 
     @Column(name = "senha")
-    private Boolean senha;
+    private String senha;
 
     @Column(name = "tipo_usuario")
     private TipoUsuarioEnum tipoUsuarioEnum;
