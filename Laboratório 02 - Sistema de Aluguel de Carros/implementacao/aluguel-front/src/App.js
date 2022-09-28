@@ -1,15 +1,14 @@
 import { Grid } from "@mui/material";
 import { Component, useEffect } from "react";
 import criarCarros from "./services/Carros";
-import {Home} from './components/Home'
-import  ListPedido  from "./components/ListPedidos";
+import Home from "./components/Home";
+import ListPedido from "./components/ListPedidos";
 function App() {
-
   return (
     <div className="container">
-   <Home></Home>
-   <ListPedido/>
-   </div>
+      <Home />
+      <ListPedido />
+    </div>
   );
 }
 
