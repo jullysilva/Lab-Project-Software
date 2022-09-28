@@ -5,7 +5,6 @@ import com.puc.aluguel.mapper.PedidoMapper;
 import com.puc.aluguel.model.dto.AgentePedidoDTO;
 import com.puc.aluguel.model.dto.ContratoDTO;
 import com.puc.aluguel.model.dto.PedidoDTO;
-import com.puc.aluguel.model.dto.UsuarioDTO;
 import com.puc.aluguel.model.entity.Contrato;
 import com.puc.aluguel.model.entity.Pedido;
 import com.puc.aluguel.model.enums.TipoRegistroEnum;
