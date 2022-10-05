@@ -2,7 +2,7 @@
 # Descrição das Histórias de Usuário
 Historias de usuário sobre as suas expectativas sobre o sistema de moeda estudantil, com a finalidade de definir as funcionalidades do sistema assim como os objetivos que devem ser cumpridos.
 
-## Aluno
+>## Aluno
 
 - Como aluno, quero consultar a quantidade de moedas, para quem enviei e de quem eu recebi (extrato).
 
