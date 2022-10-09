@@ -2,6 +2,14 @@
 # Descrição das Histórias de Usuário
 Historias de usuário sobre as suas expectativas sobre o sistema de moeda estudantil, com a finalidade de definir as funcionalidades do sistema assim como os objetivos que devem ser cumpridos.
 
+>## Usuário
+
+- Como usuário do sistema, eu quero me cadastrar no sistema.
+
+- Como usuário do sistema, eu quero me logar no sistema para ter acesso às funcionalidades.
+
+- Como usuário do sistema, quero
+
 >## Aluno
 
 - Como aluno, quero consultar a quantidade de moedas, para quem enviei e de quem eu recebi (extrato).
@@ -16,6 +24,8 @@ Historias de usuário sobre as suas expectativas sobre o sistema de moeda estuda
 
 >## Sistema
 
+- Como sistema, devo cadastrar previamente as instituições de ensino.
+
 - Como sistema, quero enviar uma quantidade determinada para os professores a cada semestre.
 
 - Como sistema, devo notificar o aluno e o professor, caso ocorra transferência de moedas.
@@ -24,8 +34,8 @@ Historias de usuário sobre as suas expectativas sobre o sistema de moeda estuda
 
 - Como empresa, devo cadastrar vantagens, com descrição e o valor da vantagem em moedas.
 
->## Usuário
+- Como empresa, quero cadastrar usuário.
 
-- Como usuário do sistema, eu quero me cadastrar no sistema.
+- Como empresa, quero logar no sistema, pelo email.
 
-- Como usuário do sistema, eu quero me logar no sistema para ter acesso às funcionalidades.
+
