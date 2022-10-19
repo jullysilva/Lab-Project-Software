@@ -16,11 +16,19 @@ Historias de usuário sobre as suas expectativas sobre o sistema de moeda estuda
 
 - Como aluno, quero trocar as moedas, que possuo, por vantagens oferecidas pela empresas parceiras da instituição de ensino.
 
+- Como aluno, quero me cadastrar no sistema para utilizar as vantagens oferecidas.
+
+- Como aluno, quero ser notificado ao receber novas moedas.
+
+- Como aluno, quero receber meu cupom após resgatar uma vantagem.
+
 >## Professor
 
 - Como professor, quero poder enviar moedas para os alunos, contendo a justificativa da contemplação.
 
 - Como professor, quero consultar a quantidade de moedas, para quem foi enviado e por qual motivo (extrato).
+
+- Como professor, quero utilizar meu saldo de moedas restante de outro semestre. 
 
 >## Sistema
 
@@ -37,5 +45,7 @@ Historias de usuário sobre as suas expectativas sobre o sistema de moeda estuda
 - Como empresa, quero cadastrar usuário.
 
 - Como empresa, quero logar no sistema, pelo email.
+
+- Como empresa, quero adicionar fotos para respresentar a vantagem oferecida
 
 
