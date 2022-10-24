@@ -1,11 +1,6 @@
 import React, { usePromise, useCallback } from "react";
-import BuscarTodosPedidos from "../services/Pedidos";
 
 const ListPedido = () => {
-  const buscarPedidos = useCallback(async () => {
-    return await BuscarTodosPedidos();
-  }, []);
-
   // const data = buscarPedidos();
 
   // console.log(data);
