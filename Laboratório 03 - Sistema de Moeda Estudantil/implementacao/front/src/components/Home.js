@@ -1,71 +1,132 @@
 import React, { useState } from "react";
-import Cadastro from "./Cadastro";
+import { Card, Container, Row, Button, Table, Form } from "react-bootstrap";
+import { criarInstituicao } from "../services/Instituicao";
+import { criarVantagem, buscarVantagens } from "../services/Vantagens";
+import Aluno from "./Aluno";
+import Professor from "./Professor";
 
 const Home = () => {
-  const [showForm, setShowForm] = useState(false);
+  const [aluno, setAluno] = useState(false);
+  const [professor, setProfessor] = useState(false);
+  const [cadastrarVantagem, setCadastrarVantagem] = useState(false);
+  const [vantagens, setVantagens] = useState();
+
+  const [custo, setCusto] = useState("");
+  const [descricao, setDescricao] = useState("");
+
+  const onHandleGenerate = async () => {
+    const res = await criarInstituicao();
+  };
+
+  const handleRegisterVantagem = async (e) => {
+    e.preventDefault();
+    const data = {
+      custo: custo,
+      descricao: descricao,
+    };
+    const resp = await criarVantagem(data);
+    setCadastrarVantagem(false);
+    onLoadVantagens();
+    setCusto("");
+    setDescricao("");
+  };
+
+  const onLoadVantagens = async () => {
+    const resp = await buscarVantagens();
+    setVantagens(resp);
+  };
 
   return (
     <>
-      <div className="mt-5 d flex justify content-left">
-        <form action="/action_page.php">
-          <div class="container">
-            <h1>Register</h1>
-            <p>Please fill in this form to create an account.</p>
+      <Container fluid>
+        <Row style={{ justifyContent: "space-evenly" }}>
+          <Card style={{ width: "18rem" }}>
+            <Card.Body>
+              <Card.Title>Portal Aluno</Card.Title>
+              <Button variant="primary" onClick={() => setAluno(true)}>
+                Acessar
+              </Button>
+            </Card.Body>
+          </Card>
 
-            <label for="email">
-              <b>Email</b>
-            </label>
-            <input
-              type="text"
-              placeholder="Enter Email"
-              name="email"
-              id="email"
-              required
-            />
+          <Card style={{ width: "18rem" }}>
+            <Card.Body>
+              <Card.Title>Portal Professor</Card.Title>
+              <Button variant="primary" onClick={() => setProfessor(true)}>
+                Acessar
+              </Button>
+            </Card.Body>
+          </Card>
 
-            <label for="psw">
-              <b>Senha</b>
-            </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="psw"
-              id="psw"
-              required
-            />
+          <Card style={{ width: "18rem" }}>
+            <Card.Body>
+              <Card.Title>Empresa</Card.Title>
+              <Button
+                variant="primary"
+                onClick={() => setCadastrarVantagem(true)}
+              >
+                Cadastrar Vantagem
+              </Button>
+            </Card.Body>
+          </Card>
+        </Row>
+      </Container>
+      <Container>
+        {cadastrarVantagem && (
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Descrição</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Descreva a vantagem"
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+              />
+            </Form.Group>
 
-            <label for="psw-repeat">
-              <b>Repeat Password</b>
-            </label>
-            <input
-              type="password"
-              placeholder="Repeat Password"
-              name="psw-repeat"
-              id="psw-repeat"
-              required
-            />
-            <p>
-              By creating an account you agree to our{" "}
-              <a href="#">Terms & Privacy</a>.
-            </p>
-
-            <button
+            <Form.Group className="mb-3">
+              <Form.Label>Quantas moedas?</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Custo"
+                value={custo}
+                onChange={(e) => setCusto(e.target.value)}
+              />
+            </Form.Group>
+            <Button
+              variant="primary"
               type="submit"
-              class="registerbtn"
-              onClick={() => setShowForm(true)}
+              onClick={(e) => handleRegisterVantagem(e)}
             >
-              Register
-            </button>
-          </div>
-
-          <div class="container signin">
-            <p>
-              Already have an account? <a href="#">Sign in</a>.
-            </p>
-          </div>
-        </form>
-      </div>
-      {showForm && <Cadastro />}
+              Cadastrar
+            </Button>
+          </Form>
+        )}
+        {vantagens && (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Custo</th>
+                <th>Descricao</th>
+              </tr>
+            </thead>
+            <tbody>
+              {vantagens.map((vantagem) => {
+                return (
+                  <tr>
+                    <td>{vantagem.id}</td>
+                    <td>{vantagem.custo} moedas</td>
+                    <td>{vantagem.descricao}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        )}
+        {aluno && <Aluno />}
+        {professor && <Professor />}
+      </Container>
     </>
   );
 };
