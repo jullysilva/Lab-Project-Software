@@ -18,3 +18,10 @@ export const resgatarVantagem = async (idVantagem, idAluno) => {
 
   return response.data;
 };
+
+export const consultarExtratoAluno = async (idAluno) => {
+  const url = `/consultar-extrato-aluno/${idAluno}`;
+  const response = await api.get(url);
+
+  return response.data;
+};

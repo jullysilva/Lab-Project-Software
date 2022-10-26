@@ -39,6 +39,10 @@ const Aluno = () => {
     const idAluno = parseInt(localStorage.getItem("codigo-aluno") || codAluno);
     const response = await resgatarVantagem(idVantagem, idAluno);
     console.log(response);
+    const valor = await consultarExtratoAluno(idAluno);
+    console.log(valor);
+    setMoedas(true);
+    setQtdMoedas(valor);
   };
 
   const FormLogin = () => {

@@ -1,7 +1,6 @@
 import api from "./api";
 
 export const data = {
-  id: Math.random(),
   nome: "PUCMINAS",
 };
 
