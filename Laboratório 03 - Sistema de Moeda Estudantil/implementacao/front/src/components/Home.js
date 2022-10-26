@@ -22,6 +22,7 @@ const Home = () => {
   const [professor, setProfessor] = useState(false);
   const [cadastrarVantagem, setCadastrarVantagem] = useState(false);
   const [vantagens, setVantagens] = useState();
+  const [empresa, setEmpresa] = useState(false);
 
   const [custo, setCusto] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -37,6 +38,22 @@ const Home = () => {
   const [curso, setCurso] = useState("");
   const [instituicao, setInstituicao] = useState("");
   const [endereco, setEndereco] = useState("");
+
+  const [nomeEmpresa,setNomeEmpresa] =useState("");
+
+  const onSubmitCadastroEmpresa = async (e) => {
+    e.preventDefault();
+    const data = {
+      nome: nome
+    };
+    const response = await criarInstituicao(data);
+    if (response) {
+      setNomeEmpresa(response.nome);
+      setEmpresa(false);
+    
+    }
+    setEmpresa(false);
+  };
 
   const onHandleGenerate = async () => {
     const data = {
@@ -140,6 +157,14 @@ const Home = () => {
     setCreateP(false);
     setProfessor(false);
   };
+  const cadastroEmpresa = () => {
+    setEmpresa(true);
+    setVantagens(false);
+    setAluno(false);
+    setCreateA(false);
+    setCreateP(false);
+    setProfessor(false);
+  }
 
   return (
     <>
@@ -184,9 +209,20 @@ const Home = () => {
           <Card style={{ width: "18rem" }}>
             <Card.Body>
               <Card.Title>Empresa</Card.Title>
-              <Button variant="primary" onClick={cadastroV}>
-                Cadastrar Vantagem
-              </Button>
+              <Row>
+                <Col>
+                  <Button variant="primary" onClick={cadastroV}>
+                    Cadastrar Vantagem
+                  </Button>
+                </Col>
+                <Col>
+                  <Button variant="success" onClick={cadastroEmpresa}>
+                    Cadastrar Empresa
+                  </Button>
+                </Col>
+              </Row>
+
+
             </Card.Body>
           </Card>
         </Row>
@@ -243,6 +279,29 @@ const Home = () => {
               })}
             </tbody>
           </Table>
+        )}
+
+{empresa && (
+           <Form>
+           <Row>
+             <Form.Group as={Col}>
+               <Form.Label>Nome</Form.Label>
+               <Form.Control
+                 type="text"
+                 placeholder="Insira seu nome"
+                 onChange={(text) => setNomeEmpresa(text.target.value)} required
+               />
+             </Form.Group>
+           </Row>
+           <Button
+             className="mt-2"
+             variant="primary"
+             type="submit"
+             onClick={(e) => onSubmitCadastroEmpresa(e)}
+           >
+             Cadastrar
+           </Button>
+         </Form>
         )}
         {aluno && !createA && <Aluno />}
         {professor && !createP && <Professor />}
