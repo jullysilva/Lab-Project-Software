@@ -7,7 +7,6 @@ import {
 import { Form, Col, Button, Row, Container, Badge } from "react-bootstrap";
 
 const Aluno = () => {
-  const [login, setLogin] = useState(false);
   const [resgate, setResgate] = useState(false);
   const [moedas, setMoedas] = useState(false);
   const [showVantagem, setShowVantagem] = useState(false);
@@ -37,10 +36,8 @@ const Aluno = () => {
     e.preventDefault();
     const idVantagem = codVantagem;
     const idAluno = parseInt(localStorage.getItem("codigo-aluno") || codAluno);
-    const response = await resgatarVantagem(idVantagem, idAluno);
-    console.log(response);
+    await resgatarVantagem(idVantagem, idAluno);
     const valor = await consultarExtratoAluno(idAluno);
-    console.log(valor);
     setMoedas(true);
     setQtdMoedas(valor);
   };

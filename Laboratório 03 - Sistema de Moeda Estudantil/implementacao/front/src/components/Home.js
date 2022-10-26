@@ -51,7 +51,7 @@ const Home = () => {
       custo: custo,
       descricao: descricao,
     };
-    const resp = await criarVantagem(data);
+    await criarVantagem(data);
     setCadastrarVantagem(false);
     onLoadVantagens();
     setCusto("");
@@ -74,10 +74,8 @@ const Home = () => {
       departamento: departamento,
     };
     const res = await criarProfessor(data);
-    console.log(res);
     localStorage.setItem("codigo-prof", res.id);
-    setProfessor(true);
-    setCreateP(false);
+    AcessoP();
   };
 
   const onSubmitCadastroAlu = async (e) => {
@@ -95,26 +93,69 @@ const Home = () => {
 
     const resp = await criarAluno(data);
     localStorage.setItem("codigo-aluno", resp.id);
-    console.log(resp);
+    AcessoA();
+  };
+
+  const RegistroP = () => {
+    setCadastrarVantagem(false);
+    setVantagens(false);
+    setAluno(false);
+    setCreateA(false);
+    setCreateP(true);
+    setProfessor(false);
+  };
+
+  const AcessoP = () => {
+    setCadastrarVantagem(false);
+    setVantagens(false);
+    setAluno(false);
+    setCreateA(false);
+    setCreateP(false);
+    setProfessor(true);
+  };
+
+  const RegistroA = () => {
+    setCadastrarVantagem(false);
+    setVantagens(false);
+    setAluno(false);
+    setCreateA(true);
+    setCreateP(false);
+    setProfessor(false);
+  };
+
+  const AcessoA = () => {
+    setCadastrarVantagem(false);
+    setVantagens(false);
     setAluno(true);
     setCreateA(false);
+    setCreateP(false);
+    setProfessor(false);
+  };
+
+  const cadastroV = () => {
+    setCadastrarVantagem(true);
+    setVantagens(false);
+    setAluno(false);
+    setCreateA(false);
+    setCreateP(false);
+    setProfessor(false);
   };
 
   return (
     <>
-      <Container fluid onLoad={onHandleGenerate} className="m-5">
+      <Container onLoad={onHandleGenerate} className="mt-3">
         <Row style={{ justifyContent: "space-evenly" }}>
           <Card style={{ width: "18rem" }}>
             <Card.Body>
               <Card.Title>Portal Aluno</Card.Title>
               <Row>
                 <Col>
-                  <Button variant="success" onClick={() => setAluno(true)}>
+                  <Button variant="success" onClick={AcessoA}>
                     Acessar
                   </Button>
                 </Col>
                 <Col>
-                  <Button variant="primary" onClick={() => setCreateA(true)}>
+                  <Button variant="primary" onClick={RegistroA}>
                     Registrar
                   </Button>
                 </Col>
@@ -127,12 +168,12 @@ const Home = () => {
               <Card.Title>Portal Professor</Card.Title>
               <Row>
                 <Col>
-                  <Button variant="success" onClick={() => setProfessor(true)}>
+                  <Button variant="success" onClick={AcessoP}>
                     Acessar
                   </Button>
                 </Col>
                 <Col>
-                  <Button variant="primary" onClick={() => setCreateP(true)}>
+                  <Button variant="primary" onClick={RegistroP}>
                     Registrar
                   </Button>
                 </Col>
@@ -143,10 +184,7 @@ const Home = () => {
           <Card style={{ width: "18rem" }}>
             <Card.Body>
               <Card.Title>Empresa</Card.Title>
-              <Button
-                variant="primary"
-                onClick={() => setCadastrarVantagem(true)}
-              >
+              <Button variant="primary" onClick={cadastroV}>
                 Cadastrar Vantagem
               </Button>
             </Card.Body>
@@ -185,7 +223,7 @@ const Home = () => {
           </Form>
         )}
         {vantagens && (
-          <Table striped bordered hover>
+          <Table striped bordered hover className="mt-2">
             <thead>
               <tr>
                 <th>#</th>
@@ -229,7 +267,9 @@ const Home = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group className="mb-3">
+            </Row>
+            <Row>
+              <Form.Group as={Col}>
                 <Form.Label>Senha</Form.Label>
                 <Form.Control
                   type="password"
@@ -238,18 +278,16 @@ const Home = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
+              <Form.Group as={Col}>
+                <Form.Label>Código da Instituicao</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={idInst}
+                  placeholder="Código da instituição"
+                  onChange={(e) => setIdInst(e.target.value)}
+                />
+              </Form.Group>
             </Row>
-
-            <Form.Group className="mb-3" controlId="formGridAddress2">
-              <Form.Label>Código da Instituicao</Form.Label>
-              <Form.Control
-                type="number"
-                value={idInst}
-                placeholder="Código da instituição"
-                onChange={(e) => setIdInst(e.target.value)}
-              />
-            </Form.Group>
-
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>CPF</Form.Label>
@@ -371,6 +409,7 @@ const Home = () => {
             </Row>
 
             <Button
+              className="mt-2"
               variant="primary"
               type="submit"
               onClick={(e) => onSubmitCadastroAlu(e)}
