@@ -13,12 +13,8 @@ export const loginAluno = async (data) => {
 };
 
 export const resgatarVantagem = async (idVantagem, idAluno) => {
-  const response = await api.post("/resgatar-vantagem", idVantagem, idAluno);
+  const url = `/resgatar-vantagem/${idVantagem}/${idAluno}`;
+  const response = await api.post(url);
 
-  return response.data;
-};
-
-export const consultarExtratoAluno = async (id) => {
-  const response = await api.get("/consultar-extrato-aluno", id);
   return response.data;
 };

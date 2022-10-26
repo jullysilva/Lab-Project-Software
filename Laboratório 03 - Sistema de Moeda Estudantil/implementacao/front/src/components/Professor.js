@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Form,
   Button,
@@ -31,14 +31,11 @@ const Professor = () => {
   const [qtdMoedas, setQtdMoedas] = useState();
 
   const buscarMoedas = async () => {
-    const data = {
-      idProfessor: parseInt(
-        localStorage.getItem("codigo-prof" || codProfessor)
-      ),
-    };
-    const resp = await consultarExtratoProfessor(data);
-    await setQtdMoedas(150);
-    console.log(qtdMoedas, "caramba");
+    const idProfessor = parseInt(
+      localStorage.getItem("codigo-prof" || codProfessor)
+    );
+    const resp = await consultarExtratoProfessor(idProfessor);
+    await setQtdMoedas(resp);
   };
 
   const onSubmitLogin = async (e) => {

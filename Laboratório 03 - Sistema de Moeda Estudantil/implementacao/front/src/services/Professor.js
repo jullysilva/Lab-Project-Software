@@ -16,7 +16,8 @@ export const criarProfessor = async (data) => {
   return response.data;
 };
 
-export const consultarExtratoProfessor = async (data) => {
-  const response = await api.get("/consultar-extrato-professor", data);
+export const consultarExtratoProfessor = async (id) => {
+  const url = `/consultar-extrato-professor/${id}`;
+  const response = await api.get(url);
   return response.data;
 };

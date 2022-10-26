@@ -35,11 +35,9 @@ const Aluno = () => {
 
   const onHandleRanson = async (e) => {
     e.preventDefault();
-    const data = {
-      idVantagem: codVantagem,
-      id: localStorage.getItem("codigo-aluno") || codAluno,
-    };
-    const response = await resgatarVantagem(data);
+    const idVantagem = codVantagem;
+    const idAluno = parseInt(localStorage.getItem("codigo-aluno") || codAluno);
+    const response = await resgatarVantagem(idVantagem, idAluno);
     console.log(response);
   };
 
@@ -144,14 +142,6 @@ const Aluno = () => {
               />
             </Form.Group>
           </Row>
-
-          {/* <Row className="m-2">
-            {showAlert && (
-              <Alert variant="success">
-                Você enviou {qtd || 1000} moedas para seu aluno!
-              </Alert>
-            )}
-          </Row> */}
 
           <Button
             variant="success"
