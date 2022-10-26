@@ -12,7 +12,7 @@ export const loginAluno = async (data) => {
   return response.data;
 };
 
-export const resgatarVanatagem = async (idVantagem, idAluno) => {
+export const resgatarVantagem = async (idVantagem, idAluno) => {
   const response = await api.post("/resgatar-vantagem", idVantagem, idAluno);
 
   return response.data;

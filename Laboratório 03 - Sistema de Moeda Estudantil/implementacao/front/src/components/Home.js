@@ -80,7 +80,8 @@ const Home = () => {
     setCreateP(false);
   };
 
-  const onSubmitCadastro = async () => {
+  const onSubmitCadastroAlu = async (e) => {
+    e.preventDefault();
     const data = {
       nome: nome,
       email: email,
@@ -93,7 +94,10 @@ const Home = () => {
     };
 
     const resp = await criarAluno(data);
+    localStorage.setItem("codigo-aluno", resp.id);
     console.log(resp);
+    setAluno(true);
+    setCreateA(false);
   };
 
   return (
@@ -366,7 +370,11 @@ const Home = () => {
               </Form.Group>
             </Row>
 
-            <Button variant="primary" type="submit" onClick={onSubmitCadastro}>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={(e) => onSubmitCadastroAlu(e)}
+            >
               Cadastrar
             </Button>
           </Form>

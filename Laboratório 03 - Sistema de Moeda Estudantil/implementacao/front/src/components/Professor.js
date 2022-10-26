@@ -28,7 +28,7 @@ const Professor = () => {
   const [mensagem, setMensagem] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
-  const [qtdMoedas, setQtdMoedas] = useState(0);
+  const [qtdMoedas, setQtdMoedas] = useState();
 
   const buscarMoedas = async () => {
     const data = {
