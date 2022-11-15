@@ -31,8 +31,4 @@ public class VantagemService {
         var vantagem = repository.findById(idVantagem);
         return vantagem.get();
     }
-
-//    public List<VantagemDTO> consultarMinhasVantagens(Long idAluno) {
-//
-//    }
 }

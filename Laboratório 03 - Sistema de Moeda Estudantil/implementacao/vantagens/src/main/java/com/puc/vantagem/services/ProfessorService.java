@@ -1,5 +1,6 @@
 package com.puc.vantagem.services;
 
+import com.puc.vantagem.exceptions.BusinesException;
 import com.puc.vantagem.mapper.ProfessorMapper;
 import com.puc.vantagem.model.dto.BonificacaoDTO;
 import com.puc.vantagem.model.dto.ProfessorDTO;
@@ -17,6 +18,9 @@ public class ProfessorService {
     @Autowired
     AlunoService alunoService;
 
+    @Autowired
+    BonificacaoService bonificacaoService;
+
     public ProfessorDTO criarProfessor(ProfessorDTO professorDTO) {
         professorDTO.setMoeda(1000);
         var professor = repository.save(ProfessorMapper.INSTANCE.dtoToEntity(professorDTO));
@@ -29,22 +33,32 @@ public class ProfessorService {
     }
 
     public boolean login(UsuarioDTO usuarioDTO) {
-        var aluno = repository.findById(usuarioDTO.getId());
+        var professor = repository.findById(usuarioDTO.getId())
+                .orElseThrow(() -> new BusinesException("ID do professor nao encontrado"));
 
-        if (aluno.get().getSenha().equals(usuarioDTO.getSenha())) {
-            return true;
-        }
-        return false;
+        return professor.getSenha().equals(usuarioDTO.getSenha())
+                && professor.getEmail().equals(usuarioDTO.getEmail())
+                && professor.getNome().equals(usuarioDTO.getNome());
     }
 
     public void retirarMoeda(Long idProfessor, Integer moeda) {
-        var professor = repository.findById(idProfessor);
-        professor.get().setMoeda(professor.get().getMoeda() - moeda);
-        repository.save(professor.get());
+        var professor = repository.findById(idProfessor)
+                .orElseThrow(() -> new BusinesException("Id do professor nao foi encontrado"));
+        professor.setMoeda(professor.getMoeda() - moeda);
+        repository.save(professor);
     }
 
     public void enviarBonificacao(BonificacaoDTO bonificacaoDTO) {
+        var moedasProfessor = consultarExtrato(bonificacaoDTO.getIdProfessor());
+
+        if (moedasProfessor < bonificacaoDTO.getCusto()) {
+            throw new BusinesException("Professor não possui moedas suficientes");
+        }
+
         alunoService.adicionarMoeda(bonificacaoDTO.getIdAluno(), bonificacaoDTO.getCusto());
+
         retirarMoeda(bonificacaoDTO.getIdProfessor(), bonificacaoDTO.getCusto());
+
+        bonificacaoService.salvarBonificacao(bonificacaoDTO);
     }
 }

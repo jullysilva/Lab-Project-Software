@@ -12,19 +12,25 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "vantagem")
+@Table(name = "bonificacao")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Vantagem {
+public class Bonificacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "id_aluno")
+    private String idAluno;
+
+    @Column(name = "id_professor")
+    private String idProfessor;
+
     @Column(name = "custo")
     private Integer custo;
 
-    @Column(name = "descricao")
-    private String descricao;
+    @Column(name = "mensagem")
+    private String mensagem;
 
 }
