@@ -9,11 +9,11 @@ import {
   Col,
 } from "react-bootstrap";
 import { criarInstituicao } from "../services/InstituicaoService";
-import { criarProfessor } from "../services/ProfessorService";
 import { criarVantagem, buscarVantagens } from "../services/VantagensService";
 import Aluno from "./Aluno/Aluno";
 import AlunoCadastro from "./Aluno/AlunoCadastro";
-import Professor from "./Professor";
+import ProfCadastro from "./Professor/ProfCadastro";
+import Professor from "./Professor/Professor";
 
 const Home = () => {
   const [createP, setCreateP] = useState(false);
@@ -27,19 +27,12 @@ const Home = () => {
   const [custo, setCusto] = useState("");
   const [descricao, setDescricao] = useState("");
 
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [idInst, setIdInst] = useState(1);
-  const [cpf, setCpf] = useState();
-  const [departamento, setDepartamento] = useState();
-
   const [nomeEmpresa,setNomeEmpresa] =useState("");
 
   const onSubmitCadastroEmpresa = async (e) => {
     e.preventDefault();
     const data = {
-      nome: nome
+      nome: nomeEmpresa
     };
     const response = await criarInstituicao(data);
     if (response) {
@@ -73,21 +66,6 @@ const Home = () => {
   const onLoadVantagens = async () => {
     const resp = await buscarVantagens();
     setVantagens(resp);
-  };
-
-  const onSubmitCadastroProf = async (e) => {
-    e.preventDefault();
-    const data = {
-      nome: nome,
-      email: email,
-      senha: password,
-      idInstituicao: idInst,
-      cpf: cpf,
-      departamento: departamento,
-    };
-    const res = await criarProfessor(data);
-    localStorage.setItem("codigo-prof", res.id);
-    AcessoP();
   };
 
   const RegistroP = () => {
@@ -284,86 +262,7 @@ const Home = () => {
         )}
         {aluno && !createA && <Aluno />}
         {professor && !createP && <Professor />}
-        {createP && (
-          <Form>
-            <Row className="mb-3 mt-3">
-              <Form.Group as={Col}>
-                <Form.Label>Nome</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={nome}
-                  placeholder="Insira seu nome"
-                  onChange={(e) => setNome(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={email}
-                  placeholder="Insira seu email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>Senha</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={password}
-                  placeholder="Insira a senha"
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Código da Instituicao</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={idInst}
-                  placeholder="Código da instituição"
-                  onChange={(e) => setIdInst(e.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridCity">
-                <Form.Label>CPF</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={cpf}
-                  maxLength={10}
-                  placeholder="Insira seu CPF"
-                  onChange={(e) => setCpf(e.target.value)}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridZip">
-                <Form.Label>Departamento</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={departamento}
-                  placeholder="Insira o Departamento"
-                  onChange={(e) => setDepartamento(e.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Row>
-
-            <Button
-              variant="primary"
-              type="submit"
-              onClick={onSubmitCadastroProf}
-            >
-              Cadastrar
-            </Button>
-          </Form>
-        )}
+        {createP && <ProfCadastro />}
         {createA && <AlunoCadastro />}
       </Container>
     </>

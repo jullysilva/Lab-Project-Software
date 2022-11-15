@@ -8,7 +8,6 @@ import AlunoVantagem from "./AlunoVantagem";
 const Aluno = () => {
   const [validated, setValidated] = useState(false);
   const [resgate, setResgate] = useState(false);
-  const [moedas, setMoedas] = useState(0);
   const [showVantagem, setShowVantagem] = useState(false);
   const [aluno, setAluno] = useState({
     codAluno: 0,
