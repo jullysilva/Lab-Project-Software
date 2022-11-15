@@ -1,6 +1,7 @@
 package com.puc.vantagem.controller;
 
 import com.puc.vantagem.exceptions.BusinesException;
+import com.puc.vantagem.model.dto.AlunoDTO;
 import com.puc.vantagem.model.dto.VantagemDTO;
 import com.puc.vantagem.services.VantagemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,4 @@ public class VantagemController {
             throw new BusinesException(e.getMessage());
         }
     }
-
-//    @GetMapping(value = "/consultar-minhas-vantagens/{idAluno}")
-//    public ResponseEntity<VantagemDTO> consultarExtratoAluno(@PathVariable("idAluno") Long idAluno) {
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(service.consultarMinhasVantagens(idAluno));
-//        } catch (Exception e) {
-//            throw new BusinesException(e.getMessage());
-//        }
-//    }
 }
