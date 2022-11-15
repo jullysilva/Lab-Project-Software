@@ -12,13 +12,18 @@ import {
   enviarBonificacao,
   loginProfessor,
   consultarExtratoProfessor,
-} from "../services/Professor";
+} from "../services/ProfessorService";
 
 const Professor = () => {
+  const [validated, setValidated] = useState(false);
   const [login, setLogin] = useState(true);
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [professor, setProfessor] = useState({
+    codProfessor: 0,
+    nome: null,
+    email: null,
+    password: null,
+  });
+
   const [codigo, setCodigo] = useState(1);
 
   const [enviar, setEnviar] = useState(false);
@@ -32,29 +37,36 @@ const Professor = () => {
 
   const buscarMoedas = async () => {
     const idProfessor = parseInt(
-      localStorage.getItem("codigo-prof" || codProfessor)
+      localStorage.getItem("codigo-prof" || professor.codProfessor)
     );
     const resp = await consultarExtratoProfessor(idProfessor);
     await setQtdMoedas(resp);
   };
 
   const onSubmitLogin = async (e) => {
-    await setLogin(false);
+    setLogin(false);
     e.preventDefault();
+    const form = e.currentTarget;
     const data = {
       id: codigo,
-      nome: nome,
-      email: email,
-      senha: password,
+      nome: professor.nome,
+      email: professor.email,
+      senha: professor.password,
     };
-    const resp = await loginProfessor(data);
-    if (resp === true) {
-      localStorage.setItem("codigo-prof", codigo);
-      setLogin(false);
+    if (form.checkValidity() !== false) {
+      const resp = await loginProfessor(data);
+      if (resp === true) {
+        localStorage.setItem("codigo-prof", codigo);
+        setLogin(false);
+      }
+      else{
+        console.log('deu ruim');
+      };
     }
     else{
-      console.log('deu ruim');
+      e.stopPropagation();
     }
+    setValidated(true);
   };
 
   const onSendMoney = async (e) => {
@@ -62,26 +74,29 @@ const Professor = () => {
     const data = {
       custo: qtd,
       mensagem: mensagem,
-      idProfessor: codProfessor,
+      idProfessor: professor.codProfessor,
       idAluno: codAluno,
     };
     await enviarBonificacao(data);
     setShowAlert(true);
     setEnviar(true);
-    await buscarMoedas(codProfessor);
+    await buscarMoedas(professor.codProfessor);
   };
 
   const FormLogin = () => {
     return (
-      <Form>
+      <Form noValidate validated={validated} onSubmit={onSubmitLogin}>
         <Row className="mb-3">
           <Form.Group as={Col}>
             <Form.Label>Nome</Form.Label>
             <Form.Control
               type="text"
-              value={nome}
+              value={professor.nome}
               placeholder="Insira seu nome"
-              onChange={(text) => setNome(text.target.value)}
+              onChange={(text) => {
+                professor.nome = text.target.value;
+                setProfessor({...professor});
+              }}
               required
             />
           </Form.Group>
@@ -90,9 +105,12 @@ const Professor = () => {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              value={email}
+              value={professor.email}
               placeholder="Insira seu email"
-              onChange={(text) => setEmail(text.target.value)}
+              onChange={(text) => {
+                professor.email = text.target.value;
+                setProfessor({...professor});
+              }}
               required
             />
           </Form.Group>
@@ -102,9 +120,12 @@ const Professor = () => {
             <Form.Label>Senha</Form.Label>
             <Form.Control
               type="password"
-              value={password}
+              value={professor.password}
               placeholder="Insira a senha"
-              onChange={(text) => setPassword(text.target.value)}
+              onChange={(text) => {
+                professor.password = text.target.value;
+                setProfessor({...professor});
+              }}
               required
             />
           </Form.Group>
@@ -123,9 +144,7 @@ const Professor = () => {
         <Button
           className="mt-2"
           variant="primary"
-          type="submit"
-          onClick={(e) => onSubmitLogin(e)}
-        >
+          type="submit">
           Login
         </Button>
       </Form>

@@ -8,11 +8,11 @@ import {
   Form,
   Col,
 } from "react-bootstrap";
-import { criarAluno } from "../services/Aluno";
-import { criarInstituicao } from "../services/Instituicao";
-import { criarProfessor } from "../services/Professor";
-import { criarVantagem, buscarVantagens } from "../services/Vantagens";
-import Aluno from "./Aluno";
+import { criarInstituicao } from "../services/InstituicaoService";
+import { criarProfessor } from "../services/ProfessorService";
+import { criarVantagem, buscarVantagens } from "../services/VantagensService";
+import Aluno from "./Aluno/Aluno";
+import AlunoCadastro from "./Aluno/AlunoCadastro";
 import Professor from "./Professor";
 
 const Home = () => {
@@ -33,11 +33,6 @@ const Home = () => {
   const [idInst, setIdInst] = useState(1);
   const [cpf, setCpf] = useState();
   const [departamento, setDepartamento] = useState();
-
-  const [rg, setRg] = useState("");
-  const [curso, setCurso] = useState("");
-  const [instituicao, setInstituicao] = useState("");
-  const [endereco, setEndereco] = useState("");
 
   const [nomeEmpresa,setNomeEmpresa] =useState("");
 
@@ -93,24 +88,6 @@ const Home = () => {
     const res = await criarProfessor(data);
     localStorage.setItem("codigo-prof", res.id);
     AcessoP();
-  };
-
-  const onSubmitCadastroAlu = async (e) => {
-    e.preventDefault();
-    const data = {
-      nome: nome,
-      email: email,
-      senha: password,
-      cpf: cpf,
-      rg: rg,
-      endereco: endereco,
-      curso: curso,
-      idInstituicao: instituicao,
-    };
-
-    const resp = await criarAluno(data);
-    localStorage.setItem("codigo-aluno", resp.id);
-    AcessoA();
   };
 
   const RegistroP = () => {
@@ -387,112 +364,7 @@ const Home = () => {
             </Button>
           </Form>
         )}
-        {createA && (
-          <Form>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>Nome</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Insira seu nome"
-                  value={nome}
-                  onChange={(text) => setNome(text.target.value)}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group as={Col}>
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Insira seu email"
-                  value={email}
-                  onChange={(text) => setEmail(text.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>Senha</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Insira a senha"
-                  value={password}
-                  onChange={(text) => setPassword(text.target.value)}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group as={Col}>
-                <Form.Label>CPF</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Insira seu CPF"
-                  maxLength={10}
-                  value={cpf}
-                  onChange={(text) => setCpf(text.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>RG</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Insira seu RG"
-                  maxLength={8}
-                  value={rg}
-                  onChange={(text) => setRg(text.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Label>Endereco</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={endereco}
-                  placeholder="Insira seu endereço"
-                  onChange={(text) => setEndereco(text.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Label>Curso</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={curso}
-                  placeholder="Insira seu curso"
-                  onChange={(text) => setCurso(text.target.value)}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group as={Col}>
-                <Form.Label>Id da Instituicao</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={instituicao}
-                  placeholder="Insira o código da instituição"
-                  onChange={(text) => setInstituicao(text.target.value)}
-                  required
-                />
-              </Form.Group>
-            </Row>
-
-            <Button
-              className="mt-2"
-              variant="primary"
-              type="submit"
-              onClick={(e) => onSubmitCadastroAlu(e)}
-            >
-              Cadastrar
-            </Button>
-          </Form>
-        )}
+        {createA && <AlunoCadastro />}
       </Container>
     </>
   );

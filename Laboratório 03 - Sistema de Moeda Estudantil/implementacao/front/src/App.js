@@ -1,5 +1,5 @@
 import Home from "./components/Home";
-import { criarInstituicao } from "./services/Instituicao";
+import { criarInstituicao } from "./services/InstituicaoService";
 
 function App() {
   const startarData = async () => {
