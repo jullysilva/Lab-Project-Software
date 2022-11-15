@@ -237,6 +237,7 @@ const Home = () => {
                 placeholder="Descreva a vantagem"
                 value={descricao}
                 onChange={(e) => setDescricao(e.target.value)}
+                required
               />
             </Form.Group>
 
@@ -247,6 +248,7 @@ const Home = () => {
                 placeholder="Custo"
                 value={custo}
                 onChange={(e) => setCusto(e.target.value)}
+                required
               />
             </Form.Group>
             <Button
@@ -315,6 +317,7 @@ const Home = () => {
                   value={nome}
                   placeholder="Insira seu nome"
                   onChange={(e) => setNome(e.target.value)}
+                  required
                 />
               </Form.Group>
               <Form.Group as={Col}>
@@ -324,6 +327,7 @@ const Home = () => {
                   value={email}
                   placeholder="Insira seu email"
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </Form.Group>
             </Row>
@@ -335,6 +339,7 @@ const Home = () => {
                   value={password}
                   placeholder="Insira a senha"
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </Form.Group>
               <Form.Group as={Col}>
@@ -344,6 +349,7 @@ const Home = () => {
                   value={idInst}
                   placeholder="Código da instituição"
                   onChange={(e) => setIdInst(e.target.value)}
+                  required
                 />
               </Form.Group>
             </Row>
@@ -356,6 +362,7 @@ const Home = () => {
                   maxLength={10}
                   placeholder="Insira seu CPF"
                   onChange={(e) => setCpf(e.target.value)}
+                  required
                 />
               </Form.Group>
 
@@ -366,6 +373,7 @@ const Home = () => {
                   value={departamento}
                   placeholder="Insira o Departamento"
                   onChange={(e) => setDepartamento(e.target.value)}
+                  required
                 />
               </Form.Group>
             </Row>
@@ -389,6 +397,7 @@ const Home = () => {
                   placeholder="Insira seu nome"
                   value={nome}
                   onChange={(text) => setNome(text.target.value)}
+                  required
                 />
               </Form.Group>
 
@@ -399,6 +408,7 @@ const Home = () => {
                   placeholder="Insira seu email"
                   value={email}
                   onChange={(text) => setEmail(text.target.value)}
+                  required
                 />
               </Form.Group>
             </Row>
@@ -410,6 +420,7 @@ const Home = () => {
                   placeholder="Insira a senha"
                   value={password}
                   onChange={(text) => setPassword(text.target.value)}
+                  required
                 />
               </Form.Group>
 
@@ -421,6 +432,7 @@ const Home = () => {
                   maxLength={10}
                   value={cpf}
                   onChange={(text) => setCpf(text.target.value)}
+                  required
                 />
               </Form.Group>
             </Row>
@@ -433,6 +445,7 @@ const Home = () => {
                   maxLength={8}
                   value={rg}
                   onChange={(text) => setRg(text.target.value)}
+                  required
                 />
               </Form.Group>
               <Form.Group as={Col}>
@@ -442,6 +455,7 @@ const Home = () => {
                   value={endereco}
                   placeholder="Insira seu endereço"
                   onChange={(text) => setEndereco(text.target.value)}
+                  required
                 />
               </Form.Group>
             </Row>
@@ -453,6 +467,7 @@ const Home = () => {
                   value={curso}
                   placeholder="Insira seu curso"
                   onChange={(text) => setCurso(text.target.value)}
+                  required
                 />
               </Form.Group>
 
@@ -463,6 +478,7 @@ const Home = () => {
                   value={instituicao}
                   placeholder="Insira o código da instituição"
                   onChange={(text) => setInstituicao(text.target.value)}
+                  required
                 />
               </Form.Group>
             </Row>
