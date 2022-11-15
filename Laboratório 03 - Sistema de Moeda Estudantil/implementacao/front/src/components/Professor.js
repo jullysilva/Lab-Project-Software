@@ -48,9 +48,12 @@ const Professor = () => {
       senha: password,
     };
     const resp = await loginProfessor(data);
-    if (resp) {
+    if (resp === true) {
       localStorage.setItem("codigo-prof", codigo);
       setLogin(false);
+    }
+    else{
+      console.log('deu ruim');
     }
   };
 
@@ -79,6 +82,7 @@ const Professor = () => {
               value={nome}
               placeholder="Insira seu nome"
               onChange={(text) => setNome(text.target.value)}
+              required
             />
           </Form.Group>
 
@@ -89,6 +93,7 @@ const Professor = () => {
               value={email}
               placeholder="Insira seu email"
               onChange={(text) => setEmail(text.target.value)}
+              required
             />
           </Form.Group>
         </Row>
@@ -100,6 +105,7 @@ const Professor = () => {
               value={password}
               placeholder="Insira a senha"
               onChange={(text) => setPassword(text.target.value)}
+              required
             />
           </Form.Group>
 
@@ -110,6 +116,7 @@ const Professor = () => {
               value={codigo}
               placeholder="Insira o código"
               onChange={(text) => setCodigo(text.target.value)}
+              required
             />
           </Form.Group>
         </Row>
@@ -159,6 +166,7 @@ const Professor = () => {
                 value={codAluno}
                 placeholder="Insira o código do aluno"
                 onChange={(text) => setCodAluno(text.target.value)}
+                required
               />
             </Form.Group>
 
@@ -169,6 +177,7 @@ const Professor = () => {
                 value={qtd}
                 placeholder="Insira a quantidade"
                 onChange={(text) => setQtd(text.target.value)}
+                required
               />
             </Form.Group>
           </Row>
@@ -180,6 +189,7 @@ const Professor = () => {
                 value={codProfessor}
                 placeholder="Insira seu código"
                 onChange={(text) => setCodProfessor(text.target.value)}
+                required
               />
             </Form.Group>
             <Form.Group as={Col} className="mt-1">
@@ -189,6 +199,7 @@ const Professor = () => {
                 value={mensagem}
                 placeholder="Escreva uma mensagem"
                 onChange={(text) => setMensagem(text.target.value)}
+                required
               />
             </Form.Group>
           </Row>

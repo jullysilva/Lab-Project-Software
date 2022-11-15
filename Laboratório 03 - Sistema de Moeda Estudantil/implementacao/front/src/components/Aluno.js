@@ -10,21 +10,22 @@ const Aluno = () => {
   const [resgate, setResgate] = useState(false);
   const [moedas, setMoedas] = useState(false);
   const [showVantagem, setShowVantagem] = useState(false);
-
-  const [codAluno, setCodAluno] = useState(1);
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [aluno, setAluno] = useState({
+    codAluno: 1,
+    nome: '',
+    email: '',
+    password: ''
+  });
   const [qtdMoedas, setQtdMoedas] = useState(0);
   const [codVantagem, setCodVantagem] = useState(1);
 
   const onSubmitLogin = async (e) => {
     e.preventDefault();
     const data = {
-      id: localStorage.getItem("codigo-aluno") || codAluno,
-      nome: nome,
-      email: email,
-      senha: password,
+      id: localStorage.getItem("codigo-aluno") || aluno.codAluno,
+      nome: aluno.nome,
+      email: aluno.email,
+      senha: aluno.password,
     };
     const response = await loginAluno(data);
     if (response) {
@@ -35,7 +36,7 @@ const Aluno = () => {
   const onHandleRanson = async (e) => {
     e.preventDefault();
     const idVantagem = codVantagem;
-    const idAluno = parseInt(localStorage.getItem("codigo-aluno") || codAluno);
+    const idAluno = parseInt(localStorage.getItem("codigo-aluno") || aluno.codAluno);
     await resgatarVantagem(idVantagem, idAluno);
     const valor = await consultarExtratoAluno(idAluno);
     setMoedas(true);
@@ -51,7 +52,10 @@ const Aluno = () => {
             <Form.Control
               type="text"
               placeholder="Insira seu nome"
-              onChange={(text) => setNome(text.target.value)}
+              onChange={(text) => {
+                aluno.nome = text.target.value;
+                setAluno({...aluno});
+              }} required
             />
           </Form.Group>
 
@@ -60,7 +64,10 @@ const Aluno = () => {
             <Form.Control
               type="email"
               placeholder="Insira seu email"
-              onChange={(text) => setEmail(text.target.value)}
+              onChange={(text) => {
+                aluno.email = text.target.value;
+                setAluno({...aluno});
+              }} required
             />
           </Form.Group>
         </Row>
@@ -70,7 +77,10 @@ const Aluno = () => {
             <Form.Control
               type="text"
               placeholder="Insira seu código"
-              onChange={(text) => setCodAluno(text.target.value)}
+              onChange={(text) => { 
+                aluno.codAluno = text.target.value;
+                setAluno({...aluno});
+              }} required
             />
           </Form.Group>
           <Form.Group as={Col}>
@@ -78,7 +88,10 @@ const Aluno = () => {
             <Form.Control
               type="password"
               placeholder="Insira a senha"
-              onChange={(text) => setPassword(text.target.value)}
+              onChange={(text) => {
+                aluno.password = text.target.value;
+                setAluno({...aluno});
+              }} required
             />
           </Form.Group>
         </Row>
@@ -130,6 +143,7 @@ const Aluno = () => {
                 value={codVantagem}
                 placeholder="Insira o código da vantagem"
                 onChange={(text) => setCodVantagem(text.target.value)}
+                required
               />
             </Form.Group>
 
@@ -137,9 +151,12 @@ const Aluno = () => {
               <Form.Label>Código</Form.Label>
               <Form.Control
                 type="number"
-                value={codAluno}
+                value={aluno.codAluno}
                 placeholder="Insira seu código"
-                onChange={(text) => setCodAluno(text.target.value)}
+                onChange={(text) => {
+                  aluno.codAluno = text.target.value;
+                  setAluno({...aluno});
+                }} required
               />
             </Form.Group>
           </Row>
