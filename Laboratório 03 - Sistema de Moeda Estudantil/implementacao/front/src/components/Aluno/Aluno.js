@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import {
   loginAluno,
 } from "../../services/AlunoService";
-import { Form, Col, Button, Row, Container, Badge } from "react-bootstrap";
+import { Form, Col, Button, Row, Container, Badge, Alert } from "react-bootstrap";
 import AlunoVantagem from "./AlunoVantagem";
 
 const Aluno = () => {
   const [validated, setValidated] = useState(false);
-  const [resgate, setResgate] = useState(false);
+  const [message, setMessage] = useState(false);
+  const [login, setLogin] = useState(false);
   const [showVantagem, setShowVantagem] = useState(false);
   const [aluno, setAluno] = useState({
-    codAluno: 0,
+    codAluno: localStorage.getItem("codigo-aluno"),
     nome: null,
     email: null,
     password: null
@@ -22,27 +23,23 @@ const Aluno = () => {
     const form = e.currentTarget;
     e.preventDefault();
     if(form.checkValidity() === true){
-      const data = {
-        id: localStorage.getItem("codigo-aluno") || aluno.codAluno,
-        nome: aluno.nome,
-        email: aluno.email,
-        senha: aluno.password,
-      };
-      const response = await loginAluno(data);
+      const response = await loginAluno(aluno);
       if (response) {
-        setResgate(true);
+        setLogin(true);
+      }else{
+        setMessage(true);
       }
     }else{
       e.stopPropagation();
     }
       setValidated(true);
   };
-
   
 
   const FormLogin = () => {
     return (
       <Form noValidate validated={validated} onSubmit={onSubmitLogin}>
+        {message && <Alert variant="danger">Erro ao logar. Tente novamente!</Alert>}
         <Row>
           <Form.Group as={Col}>
             <Form.Label>Nome</Form.Label>
@@ -105,8 +102,8 @@ const Aluno = () => {
 
   return (
     <>
-      {!resgate && FormLogin()}
-      {resgate && (
+      {!login && FormLogin()}
+      {login && (
         <Container className="m-3">
           <Row>
             <Col xs={12} md={10}>

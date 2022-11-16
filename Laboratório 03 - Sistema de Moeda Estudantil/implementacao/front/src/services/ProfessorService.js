@@ -21,3 +21,8 @@ export const consultarExtratoProfessor = async (id) => {
   const response = await api.get(url);
   return response.data;
 };
+
+export const listarHistorico = async () => {
+  const response = await api.get('/consultar-bonificacoes');
+  return response.data;
+}

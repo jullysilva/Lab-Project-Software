@@ -17,10 +17,10 @@ const Professor = () => {
   const [message, setMessage] = useState(false);
   const [login, setLogin] = useState(true);
   const [professor, setProfessor] = useState({
-    codProfessor: localStorage.getItem('codigo-prof'),
+    id: localStorage.getItem('codigo-prof'),
     nome: null,
     email: null,
-    password: null,
+    senha: null,
   });
 
   // const buscarMoedas = async () => {
@@ -37,9 +37,8 @@ const Professor = () => {
     
     if (form.checkValidity() === true) {
       const resp = await loginProfessor(professor);
-      console.log('resp ', resp);
       if (resp === true) {
-        localStorage.setItem("codigo-prof", professor.codProfessor);
+        localStorage.setItem("codigo-prof", professor.id);
         setLogin(false);
       }
       else{
@@ -90,10 +89,10 @@ const Professor = () => {
             <Form.Label>Senha</Form.Label>
             <Form.Control
               type="password"
-              value={professor.password}
+              value={professor.senha}
               placeholder="Insira a senha"
               onChange={(text) => {
-                professor.password = text.target.value;
+                professor.senha = text.target.value;
                 setProfessor({...professor});
               }}
               required
@@ -104,10 +103,10 @@ const Professor = () => {
             <Form.Label>Código</Form.Label>
             <Form.Control
               type="text"
-              value={professor.codProfessor}
+              value={professor.id}
               placeholder="Insira o código"
               onChange={(text) => {
-                professor.codProfessor = text.target.value;
+                professor.id = text.target.value;
                 setProfessor({...professor});  
               }}
               required

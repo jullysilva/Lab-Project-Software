@@ -4,6 +4,8 @@ import { consultarExtratoAluno, resgatarVantagem } from "../../services/AlunoSer
 
 
 const AlunoVantagem = () => {
+    const [validated, setValidated] = useState(false);
+    const [message, setMessage] = useState(false);
     const [codVantagem, setCodVantagem] = useState(1);
     const [qtdMoedas, setQtdMoedas] = useState(0);
     const [aluno, setAluno] = useState({
@@ -15,15 +17,22 @@ const AlunoVantagem = () => {
 
     const onHandleRanson = async (e) => {
         e.preventDefault();
-        const idVantagem = codVantagem;
-        const idAluno = parseInt(localStorage.getItem("codigo-aluno") || aluno.codAluno);
-        await resgatarVantagem(idVantagem, idAluno);
-        const valor = await consultarExtratoAluno(idAluno);
-        setQtdMoedas(valor);
+        const form = e.currentTarget;
+
+        if(form.checkValidity() === true){
+          const idVantagem = codVantagem;
+          const idAluno = parseInt(localStorage.getItem("codigo-aluno") || aluno.codAluno);
+          await resgatarVantagem(idVantagem, idAluno);
+          const valor = await consultarExtratoAluno(idAluno);
+          setQtdMoedas(valor);
+        }else{
+          e.stopPropagation();
+        }
+        setValidated(true);
       };
 
     return(
-        <Form>
+        <Form noValidate validated={validated} onSubmit={onHandleRanson}>
           <Row>
             <Form.Group as={Col}>
               <Form.Label>Código da vantagem</Form.Label>
@@ -54,7 +63,6 @@ const AlunoVantagem = () => {
             variant="success"
             type="submit"
             className="mt-2"
-            onClick={(e) => onHandleRanson(e)}
           >
             Resgatar
           </Button>
