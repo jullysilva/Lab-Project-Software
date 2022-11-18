@@ -5,7 +5,10 @@ export const data = {
 };
 
 export const criarInstituicao = async () => {
-  const response = await api.post("/criar-instituicao", data);
-
-  return response.data;
+  try{
+    const response = await api.post("/criar-instituicao", data);
+    return response.data;
+  }catch(error){
+    return error.data;
+  };
 };
