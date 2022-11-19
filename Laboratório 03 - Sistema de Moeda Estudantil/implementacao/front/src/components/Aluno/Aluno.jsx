@@ -2,26 +2,23 @@ import React, { useState } from "react";
 import {
   loginAluno,
 } from "../../services/AlunoService";
-import { Form, Col, Button, Row, Container, Badge, Alert } from "react-bootstrap";
+import { Form, Col, Button, Row, Alert } from "react-bootstrap";
 import AlunoVantagem from "./AlunoVantagem";
 
 const Aluno = () => {
   const [validated, setValidated] = useState(false);
   const [message, setMessage] = useState(false);
   const [login, setLogin] = useState(false);
-  const [showVantagem, setShowVantagem] = useState(false);
   const [aluno, setAluno] = useState({
-    codAluno: localStorage.getItem("codigo-aluno"),
+    id: localStorage.getItem("codigo-aluno"),
     nome: null,
     email: null,
-    password: null
+    senha: null
   });
 
-  
-
   const onSubmitLogin = async (e) => {
-    const form = e.currentTarget;
     e.preventDefault();
+    const form = e.currentTarget;
     if(form.checkValidity() === true){
       const response = await loginAluno(aluno);
       if (response) {
@@ -46,6 +43,7 @@ const Aluno = () => {
             <Form.Control
               type="text"
               placeholder="Insira seu nome"
+              value={aluno.nome}
               onChange={(text) => {
                 aluno.nome = text.target.value;
                 setAluno({...aluno});
@@ -58,6 +56,7 @@ const Aluno = () => {
             <Form.Control
               type="email"
               placeholder="Insira seu email"
+              value={aluno.email}
               onChange={(text) => {
                 aluno.email = text.target.value;
                 setAluno({...aluno});
@@ -71,8 +70,9 @@ const Aluno = () => {
             <Form.Control
               type="text"
               placeholder="Insira seu código"
+              value={aluno.id}
               onChange={(text) => { 
-                aluno.codAluno = text.target.value;
+                aluno.id = text.target.value;
                 setAluno({...aluno});
               }} required
             />
@@ -82,8 +82,9 @@ const Aluno = () => {
             <Form.Control
               type="password"
               placeholder="Insira a senha"
+              value={aluno.senha}
               onChange={(text) => {
-                aluno.password = text.target.value;
+                aluno.senha = text.target.value;
                 setAluno({...aluno});
               }} required
             />
@@ -103,28 +104,7 @@ const Aluno = () => {
   return (
     <>
       {!login && FormLogin()}
-      {login && (
-        <Container className="m-3">
-          <Row>
-            <Col xs={12} md={10}>
-              <Button
-                className="w-100"
-                variant="primary"
-                type="submit"
-                onClick={() => setShowVantagem(true)}
-              >
-                Regastar vantagens
-              </Button>
-            </Col>
-            <Col xs={6} md={2}>
-                <Button variant="light" className="w-100">
-                  MOEDAS <Badge bg="danger">qtdMoedas</Badge>
-                </Button>
-            </Col>
-          </Row>
-        </Container>
-      )}
-      {showVantagem && <AlunoVantagem />}
+      {login && <AlunoVantagem />}
     </>
   );
 };

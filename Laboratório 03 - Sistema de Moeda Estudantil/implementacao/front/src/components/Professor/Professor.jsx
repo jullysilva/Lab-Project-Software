@@ -23,14 +23,6 @@ const Professor = () => {
     senha: null,
   });
 
-  // const buscarMoedas = async () => {
-  //   const idProfessor = parseInt(
-  //     localStorage.getItem("codigo-prof" || professor.codProfessor)
-  //   );
-  //   const resp = await consultarExtratoProfessor(idProfessor);
-  //   await setQtdMoedas(resp);
-  // };
-
   const onSubmitLogin = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;

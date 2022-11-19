@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Badge, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { enviarBonificacao, consultarExtratoProfessor } from "../../services/ProfessorService";
+import { enviarBonificacao, buscarMoedas } from "../../services/ProfessorService";
 import ProfHistorico from "./ProfHistorico";
 
 
@@ -18,7 +18,7 @@ const ProfBonificacao = () => {
 
     useEffect(() => {
       async function carregaRepositorios () {
-          const resposta = await consultarExtratoProfessor(bonificacao.idProfessor);
+          const resposta = await buscarMoedas(bonificacao.idProfessor);
           setMoedas(resposta);
       }
       carregaRepositorios();
@@ -29,7 +29,7 @@ const ProfBonificacao = () => {
         const form = e.currentTarget;
         if(form.checkValidity() === true){
             await enviarBonificacao(bonificacao);
-            const res = await consultarExtratoProfessor(bonificacao.idProfessor);
+            const res = await buscarMoedas(bonificacao.idProfessor);
             setMoedas(res);
         }else{
             e.stopPropagation();

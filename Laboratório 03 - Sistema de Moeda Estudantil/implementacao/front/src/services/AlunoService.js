@@ -14,7 +14,7 @@ export const loginAluno = async (data) => {
     const response = await api.post("/login-aluno", data);
     return response.data;
   }catch(error){
-    return error.data;
+    return error.response;
   };
 };
 
@@ -24,7 +24,7 @@ export const resgatarVantagem = async (idVantagem, idAluno) => {
     const response = await api.post(url);
     return response.data;
   }catch(error){
-    return error.data;
+    return error.response;
   };
 };
 
@@ -34,16 +34,16 @@ export const buscarResgates = async(idAluno) => {
     const response = await api.get(url);
     return response.data; 
   }catch(error){
-    return error.data;
+    return error.response;
   }
 }
 
-export const consultarExtratoAluno = async (idAluno) => {
+export const buscarMoedas = async (idAluno) => {
   const url = `/consultar-extrato-aluno/${idAluno}`;
   try{
     const response = await api.get(url);
     return response.data;
   }catch(error){
-    return error.data;
+    return error.response;
   };
 };
