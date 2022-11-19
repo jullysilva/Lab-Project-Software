@@ -10,7 +10,7 @@ const Aluno = () => {
   const [message, setMessage] = useState(false);
   const [login, setLogin] = useState(false);
   const [aluno, setAluno] = useState({
-    id: localStorage.getItem("codigo-aluno"),
+    id: 0,
     nome: null,
     email: null,
     senha: null
@@ -22,6 +22,7 @@ const Aluno = () => {
     if(form.checkValidity() === true){
       const response = await loginAluno(aluno);
       if (response) {
+        localStorage.setItem('codigo-aluno', aluno.id);
         setLogin(true);
       }else{
         setMessage(true);

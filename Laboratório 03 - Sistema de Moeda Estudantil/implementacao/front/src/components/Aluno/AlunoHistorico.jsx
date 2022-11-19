@@ -3,7 +3,7 @@ import { Alert, Container, Table } from "react-bootstrap";
 import { buscarResgates } from "../../services/AlunoService";
 
 const AlunoHistorico = () => {
-    const [data, setData] = useState();
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         async function carregaRepositorios () {

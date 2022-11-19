@@ -75,6 +75,7 @@ const Home = () => {
     setCreateA(false);
     setCreateP(true);
     setProfessor(false);
+    localStorage.clear();
   };
 
   const AcessoP = () => {
@@ -84,6 +85,7 @@ const Home = () => {
     setCreateA(false);
     setCreateP(false);
     setProfessor(true);
+    localStorage.clear();
   };
 
   const RegistroA = () => {
@@ -93,6 +95,7 @@ const Home = () => {
     setCreateA(true);
     setCreateP(false);
     setProfessor(false);
+    localStorage.clear();
   };
 
   const AcessoA = () => {
@@ -102,6 +105,7 @@ const Home = () => {
     setCreateA(false);
     setCreateP(false);
     setProfessor(false);
+    localStorage.clear();
   };
 
   const cadastroV = () => {
@@ -111,6 +115,7 @@ const Home = () => {
     setCreateA(false);
     setCreateP(false);
     setProfessor(false);
+    localStorage.clear();
   };
   const cadastroEmpresa = () => {
     setEmpresa(true);
@@ -119,6 +124,7 @@ const Home = () => {
     setCreateA(false);
     setCreateP(false);
     setProfessor(false);
+    localStorage.clear();
   }
 
   return (
