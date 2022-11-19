@@ -7,7 +7,8 @@ const ProfHistorico = () => {
 
     useEffect(() => {
         async function carregaRepositorios () {
-            const resposta = await listarHistorico();
+            let idProfessor = localStorage.getItem("codigo-prof");
+            const resposta = await listarHistorico(idProfessor);
             setData(resposta);
             return resposta;
         }

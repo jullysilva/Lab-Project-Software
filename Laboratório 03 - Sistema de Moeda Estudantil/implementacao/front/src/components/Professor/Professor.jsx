@@ -17,7 +17,7 @@ const Professor = () => {
   const [message, setMessage] = useState(false);
   const [login, setLogin] = useState(true);
   const [professor, setProfessor] = useState({
-    id: localStorage.getItem('codigo-prof'),
+    id: null,
     nome: null,
     email: null,
     senha: null,

@@ -37,10 +37,11 @@ export const buscarMoedas = async (id) => {
 };
 };
 
-export const listarHistorico = async () => {
+export const listarHistorico = async (idProfessor) => {
+  const url = `/consultar-bonificacoes/${idProfessor}`;
   try{
-  const response = await api.get('/consultar-bonificacoes');
-  return response.data;
+    const response = await api.get(url);
+    return response.data;
   }catch(error){
     return error.data;
   };
