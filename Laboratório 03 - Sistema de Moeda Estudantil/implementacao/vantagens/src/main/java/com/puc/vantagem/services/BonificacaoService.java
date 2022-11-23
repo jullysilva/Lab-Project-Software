@@ -27,11 +27,10 @@ public class BonificacaoService {
     public List<BonificacaoDTO> consultarBonificacoes() {
         return BonificacaoMapper.INSTANCE.entityToDto(repository.findAll());
     }
-    
-     public List<BonificacaoDTO> consultarBonificacoesProfessor(Long idAluno) {
-        return BonificacaoMapper.INSTANCE.entityToDto(repository.findAllByIdAluno(idAluno));
+    public List<BonificacaoDTO> consultarBonificacoesProfessor(String idProfessor) {
+        return BonificacaoMapper.INSTANCE.entityToDto(repository.findAllByIdAluno(idProfessor));
     }
-    public List<BonificacaoDTO> consultarBonificacoesAluno(Long idProfessor) {
-        return BonificacaoMapper.INSTANCE.entityToDto(repository.findAllByIdProfessor(idProfessor));
+    public List<BonificacaoDTO> consultarBonificacoesAluno(String idAluno) {
+        return BonificacaoMapper.INSTANCE.entityToDto(repository.findAllByIdProfessor(idAluno));
     }
 }
