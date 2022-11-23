@@ -28,4 +28,21 @@ public class BonificacaoController {
             throw new BusinesException(e.getMessage());
         }
     }
+    @GetMapping(value = "/consultar-bonificacoes/{idProfssor}")
+    public ResponseEntity<List<BonificacaoDTO>> buscarExtratoPorProfessor(@PathVariable("idProfssor") Long idProfssor) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.consultarBonificacoesProfessor(idProfssor));
+        } catch (Exception e) {
+            throw new BusinesException(e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/consultar-bonificacoes/{idAluno}")
+    public ResponseEntity<List<BonificacaoDTO>> buscarExtratoPorAluno(@PathVariable("idAluno") Long idAluno) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.consultarBonificacoesAluno(idAluno));
+        } catch (Exception e) {
+            throw new BusinesException(e.getMessage());
+        }
+    }
 }
